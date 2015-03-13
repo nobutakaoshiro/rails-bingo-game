@@ -1,0 +1,32 @@
+<div class='container'>
+<p id="notice"><%= notice %></p>
+
+<h1>ビンゴゲーム(残り: <%= Ball::MAXCOUNT - @balls.size %> / <%= Ball::MAXCOUNT %>)</h1>
+
+<%= form_for @ball, class: 'form' do |f| %>
+  <%= f.submit '抽選！', class: 'btn btn-primary btn-lg' %>
+<% end %>
+
+
+<% if @new_ball %>
+  <div class="row">
+    <div class="col-xs-12 text-center" %>
+      <div style="font-size: 300px; color: blue; border: 10px solid rgba(0,0,255,0.5); width: 428px; margin: auto; border-radius: 214px"><%= @new_ball.num %></div>
+    </div>
+  </div>
+<% end %>
+
+
+<h3>履歴</h3>
+
+<% @balls.each do |ball| %>
+  <%= ball.num %>
+  &nbsp;
+<% end %>
+<br>
+<br>
+<%= form_tag balls_path, method: 'delete' do %>
+  <%= submit_tag 'リセット', class: 'btn btn-danger', "data-confirm" => 'リセットしますか？' %>
+<% end %>
+
+</div><!-- /.container -->
